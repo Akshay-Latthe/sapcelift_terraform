@@ -9,7 +9,7 @@ resource "spacelift_policy" "illegal_ports" {
 resource "spacelift_stack" "terra_stack" {
   name       = var.stack_name
   branch     = "main"
-  repository = "example-repo"
+  repository = "sapcelift_with_terraform"
 }
 
 resource "spacelift_policy_attachment" "illegal_ports_attachment" {
