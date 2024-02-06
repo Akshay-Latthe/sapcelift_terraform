@@ -1,13 +1,6 @@
 
-variable "spacelift_key_id" {
-  type        = string
-  default     = ""
-  
-}
-
-variable "spacelift_key_secret" {
-  type        = string
-  default     = ""
- 
+variable "stack_name" {
+  description = "Name of the Spacelift stack"
+  default     = "example-stack"
 }
 
