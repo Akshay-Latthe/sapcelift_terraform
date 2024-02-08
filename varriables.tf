@@ -1,4 +1,3 @@
-
 variable "main_stack" {
   description = "Name of the Spacelift stack"
   default     = "main-branch"
@@ -9,7 +8,7 @@ variable "dev_stack" {
   default     = "dev-branch"
 }
 
-variable "new_stack_name" {
+variable "admin_stack" {
   description = "Name of the Spacelift stack"
   default     = "admin_stack"
 }
