@@ -8,3 +8,7 @@ variable "dev_stack" {
   default     = "dev-branch"
 }
 
+variable "new_stack_name" {
+  description = "Name of the Spacelift stack"
+  default     = "admin_stack"
+}
