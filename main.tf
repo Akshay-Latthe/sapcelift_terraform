@@ -10,15 +10,15 @@ resource "spacelift_stack" "dev_stack" {
   repository = "sapcelift_with_terraform"
 }
 
-
-
-
-
-
-
-
-
-
+resource "spacelift_stack" "example-stack" {
+  name = var.new_stack_name
+  administrative    = true
+  autodeploy        = false
+  branch            = "master"
+  description       = "Shared production infrastructure (networking, k8s)"
+  repository        = "testing-spacelift"
+  terraform_version = "0.12.27"
+}
 
 
 resource "spacelift_policy" "illegal_ports" {
@@ -32,7 +32,6 @@ resource "spacelift_policy_attachment" "illegal_ports_attachment" {
   stack_id  = spacelift_stack.main_stack.id
 }
 
-
 resource "spacelift_policy" "enforce_cloud_provider" {
   name = "Policy-02"
   body = file("${path.module}/policy/enforce-cloud-provider.rego")
@@ -43,7 +42,6 @@ resource "spacelift_policy_attachment" "enforce_cloud_provider_attachment" {
   policy_id = spacelift_policy.enforce_cloud_provider.id
   stack_id  = spacelift_stack.main_stack.id
 }
-
 
 resource "spacelift_policy" "instance_size_policy" {
   name = "Policy-03"
