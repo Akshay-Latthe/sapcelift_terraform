@@ -1,3 +1,12 @@
+resource "spacelift_stack" "admin_stack" {
+  name = var.admin_stack
+  administrative    = true
+  autodeploy        = false
+  branch            = "main"
+  description       = "Shared production infrastructure (networking, k8s)"
+  repository        = "sapcelift_with_terraform"
+  terraform_version = "0.12.27"
+}
 
 resource "spacelift_stack" "main_stack" {
   name       = var.main_stack
@@ -8,16 +17,6 @@ resource "spacelift_stack" "dev_stack" {
   name       = var.dev_stack
   branch     = "dev"
   repository = "sapcelift_with_terraform"
-}
-
-resource "spacelift_stack" "admin_stack" {
-  name = var.admin_stack
-  administrative    = true
-  autodeploy        = false
-  branch            = "main"
-  description       = "Shared production infrastructure (networking, k8s)"
-  repository        = "sapcelift_with_terraform"
-  terraform_version = "0.12.27"
 }
 
 
