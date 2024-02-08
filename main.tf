@@ -3,7 +3,7 @@ resource "spacelift_stack" "example-stack" {
   name = var.new_stack_name
   administrative    = true
   autodeploy        = false
-  branch            = "master"
+  branch            = "main"
   description       = "Shared production infrastructure"
   repository        = "sapcelift_with_terraform"
   terraform_version = "0.12.27"
