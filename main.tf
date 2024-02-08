@@ -58,32 +58,32 @@ resource "spacelift_policy_attachment" "instance_size_policy_attachment" {
   stack_id  = spacelift_stack.example-stack.id
 }
 
-#==============Attach Policy to stack "main_stack" ======================================
-resource "spacelift_policy_attachment" "illegal_ports_attachment" {
-  policy_id = spacelift_policy.illegal_ports.id
-  stack_id  = spacelift_stack.main_stack.id
-}
-resource "spacelift_policy_attachment" "enforce_cloud_provider_attachment" {
-  policy_id = spacelift_policy.enforce_cloud_provider.id
-  stack_id  = spacelift_stack.main_stack.id
-}
-resource "spacelift_policy_attachment" "instance_size_policy_attachment" {
-  policy_id = spacelift_policy.instance_size_policy.id
-  stack_id  = spacelift_stack.main_stack.id
-}
+# #==============Attach Policy to stack "main_stack" ======================================
+# resource "spacelift_policy_attachment" "illegal_ports_attachment" {
+#   policy_id = spacelift_policy.illegal_ports.id
+#   stack_id  = spacelift_stack.main_stack.id
+# }
+# resource "spacelift_policy_attachment" "enforce_cloud_provider_attachment" {
+#   policy_id = spacelift_policy.enforce_cloud_provider.id
+#   stack_id  = spacelift_stack.main_stack.id
+# }
+# resource "spacelift_policy_attachment" "instance_size_policy_attachment" {
+#   policy_id = spacelift_policy.instance_size_policy.id
+#   stack_id  = spacelift_stack.main_stack.id
+# }
 
 
-#==============Attach Policy to stack "dev_stack" ====================================
+# #==============Attach Policy to stack "dev_stack" ====================================
 
-resource "spacelift_policy_attachment" "illegal_ports_attachment" {
-  policy_id = spacelift_policy.illegal_ports.id
-  stack_id  = spacelift_stack.dev_stack.id
-}
-resource "spacelift_policy_attachment" "enforce_cloud_provider_attachment" {
-  policy_id = spacelift_policy.enforce_cloud_provider.id
-  stack_id  = spacelift_stack.dev_stack.id
-}
-resource "spacelift_policy_attachment" "instance_size_policy_attachment" {
-  policy_id = spacelift_policy.instance_size_policy.id
-  stack_id  = spacelift_stack.dev_stack.id
-}
+# resource "spacelift_policy_attachment" "illegal_ports_attachment" {
+#   policy_id = spacelift_policy.illegal_ports.id
+#   stack_id  = spacelift_stack.dev_stack.id
+# }
+# resource "spacelift_policy_attachment" "enforce_cloud_provider_attachment" {
+#   policy_id = spacelift_policy.enforce_cloud_provider.id
+#   stack_id  = spacelift_stack.dev_stack.id
+# }
+# resource "spacelift_policy_attachment" "instance_size_policy_attachment" {
+#   policy_id = spacelift_policy.instance_size_policy.id
+#   stack_id  = spacelift_stack.dev_stack.id
+# }
