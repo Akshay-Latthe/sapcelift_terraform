@@ -49,15 +49,22 @@ locals {
 }
 
 resource "spacelift_policy_attachment" "policy_attachments" {
-  for_each = {
-    for stack_name, stack_resource in local.stacks : stack_name => stack_resource
-  }
+  space_id  = spacelift_space.example_space.id
+  stack_ids = [spacelift_stack.example_stack.id]
 
-  policy_id = [
-    spacelift_policy.illegal_ports.id,
-    spacelift_policy.enforce_cloud_provider.id,
-    spacelift_policy.instance_size_policy.id
-  ]
+  policy_id = spacelift_policy.illegal_ports.id
+}
 
-  stack_id = each.value.id
+resource "spacelift_policy_attachment" "policy_attachments_2" {
+  space_id  = spacelift_space.example_space.id
+  stack_ids = [spacelift_stack.example_stack.id]
+
+  policy_id = spacelift_policy.enforce_cloud_provider.id
+}
+
+resource "spacelift_policy_attachment" "policy_attachments_3" {
+  space_id  = spacelift_space.example_space.id
+  stack_ids = [spacelift_stack.example_stack.id]
+
+  policy_id = spacelift_policy.instance_size_policy.id
 }
