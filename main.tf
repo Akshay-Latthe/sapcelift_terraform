@@ -66,3 +66,4 @@ resource "spacelift_policy_attachment" "policy_attachments_3" {
   stack_id  = each.value.id
   policy_id = spacelift_policy.instance_size_policy.id
 }
+
