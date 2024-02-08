@@ -49,22 +49,16 @@ locals {
 }
 
 resource "spacelift_policy_attachment" "policy_attachments" {
-  space_id  = spacelift_space.example_space.id
-  stack_ids = [spacelift_stack.example_stack.id]
-
+  stack_id = spacelift_stack.example_stack.id
   policy_id = spacelift_policy.illegal_ports.id
 }
 
 resource "spacelift_policy_attachment" "policy_attachments_2" {
-  space_id  = spacelift_space.example_space.id
-  stack_ids = [spacelift_stack.example_stack.id]
-
+  stack_id = spacelift_stack.example_stack.id
   policy_id = spacelift_policy.enforce_cloud_provider.id
 }
 
 resource "spacelift_policy_attachment" "policy_attachments_3" {
-  space_id  = spacelift_space.example_space.id
-  stack_ids = [spacelift_stack.example_stack.id]
-
+  stack_id = spacelift_stack.example_stack.id
   policy_id = spacelift_policy.instance_size_policy.id
 }
