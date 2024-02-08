@@ -1,3 +1,4 @@
+
 resource "spacelift_stack" "example-stack" {
   name              = var.new_stack_name
   administrative    = true
@@ -49,16 +50,19 @@ locals {
 }
 
 resource "spacelift_policy_attachment" "policy_attachments" {
-  stack_id = spacelift_stack.example_stack.id
+  for_each  = local.stacks
+  stack_id  = each.value.id
   policy_id = spacelift_policy.illegal_ports.id
 }
 
 resource "spacelift_policy_attachment" "policy_attachments_2" {
-  stack_id = spacelift_stack.example_stack.id
+  for_each  = local.stacks
+  stack_id  = each.value.id
   policy_id = spacelift_policy.enforce_cloud_provider.id
 }
 
 resource "spacelift_policy_attachment" "policy_attachments_3" {
-  stack_id = spacelift_stack.example_stack.id
+  for_each  = local.stacks
+  stack_id  = each.value.id
   policy_id = spacelift_policy.instance_size_policy.id
 }
