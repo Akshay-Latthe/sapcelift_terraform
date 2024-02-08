@@ -1,6 +1,5 @@
-
 resource "spacelift_stack" "example-stack" {
-  name = var.new_stack_name
+  name              = var.new_stack_name
   administrative    = true
   autodeploy        = false
   branch            = "master"
@@ -8,7 +7,6 @@ resource "spacelift_stack" "example-stack" {
   repository        = "testing-spacelift"
   terraform_version = "0.12.27"
 }
-
 
 resource "spacelift_stack" "main_stack" {
   name       = var.main_stack
@@ -22,9 +20,7 @@ resource "spacelift_stack" "dev_stack" {
   repository = "sapcelift_with_terraform"
 }
 
-
-#==============Policy ===================================
-
+# Policies
 resource "spacelift_policy" "illegal_ports" {
   name = "Policy-01"
   body = file("${path.module}/policy/no-illegal-ports.rego")
@@ -43,47 +39,25 @@ resource "spacelift_policy" "instance_size_policy" {
   type = "PLAN"
 }
 
-
-#==============Attach Policy to stack "example-stack" ===================================
-resource "spacelift_policy_attachment" "illegal_ports_attachment" {
-  policy_id = spacelift_policy.illegal_ports.id
-  stack_id  = spacelift_stack.example-stack.id
-}
-resource "spacelift_policy_attachment" "enforce_cloud_provider_attachment" {
-  policy_id = spacelift_policy.enforce_cloud_provider.id
-  stack_id  = spacelift_stack.example-stack.id
-}
-resource "spacelift_policy_attachment" "instance_size_policy_attachment" {
-  policy_id = spacelift_policy.instance_size_policy.id
-  stack_id  = spacelift_stack.example-stack.id
+# Attach policies to all stacks
+locals {
+  stacks = {
+    example-stack = spacelift_stack.example-stack
+    main_stack    = spacelift_stack.main_stack
+    dev_stack     = spacelift_stack.dev_stack
+  }
 }
 
-# #==============Attach Policy to stack "main_stack" ======================================
-# resource "spacelift_policy_attachment" "illegal_ports_attachment" {
-#   policy_id = spacelift_policy.illegal_ports.id
-#   stack_id  = spacelift_stack.main_stack.id
-# }
-# resource "spacelift_policy_attachment" "enforce_cloud_provider_attachment" {
-#   policy_id = spacelift_policy.enforce_cloud_provider.id
-#   stack_id  = spacelift_stack.main_stack.id
-# }
-# resource "spacelift_policy_attachment" "instance_size_policy_attachment" {
-#   policy_id = spacelift_policy.instance_size_policy.id
-#   stack_id  = spacelift_stack.main_stack.id
-# }
+resource "spacelift_policy_attachment" "policy_attachments" {
+  for_each = {
+    for stack_name, stack_resource in local.stacks : stack_name => stack_resource
+  }
 
+  policy_id = [
+    spacelift_policy.illegal_ports.id,
+    spacelift_policy.enforce_cloud_provider.id,
+    spacelift_policy.instance_size_policy.id
+  ]
 
-# #==============Attach Policy to stack "dev_stack" ====================================
-
-# resource "spacelift_policy_attachment" "illegal_ports_attachment" {
-#   policy_id = spacelift_policy.illegal_ports.id
-#   stack_id  = spacelift_stack.dev_stack.id
-# }
-# resource "spacelift_policy_attachment" "enforce_cloud_provider_attachment" {
-#   policy_id = spacelift_policy.enforce_cloud_provider.id
-#   stack_id  = spacelift_stack.dev_stack.id
-# }
-# resource "spacelift_policy_attachment" "instance_size_policy_attachment" {
-#   policy_id = spacelift_policy.instance_size_policy.id
-#   stack_id  = spacelift_stack.dev_stack.id
-# }
+  stack_id = each.value.id
+}
