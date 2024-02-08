@@ -5,7 +5,7 @@ resource "spacelift_stack" "example-stack" {
   autodeploy        = false
   branch            = "master"
   description       = "Shared production infrastructure"
-  repository        = "testing-spacelift"
+  repository        = "sapcelift_with_terraform"
   terraform_version = "0.12.27"
 }
 
