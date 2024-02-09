@@ -1,6 +1,6 @@
-variable "main_stack" {
+variable "prod_stack" {
   description = "Name of the Spacelift stack"
-  default     = "main-branch"
+  default     = "prod-branch"
 }
 
 variable "dev_stack" {

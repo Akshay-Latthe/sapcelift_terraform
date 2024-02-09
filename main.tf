@@ -9,8 +9,8 @@ resource "spacelift_stack" "admin_stack" {
 }
 
 resource "spacelift_stack" "main_stack" {
-  name       = var.main_stack
-  branch     = "main"
+  name       = var.prod_stack
+  branch     = "prod"
   repository = "sapcelift_with_terraform"
 }
 resource "spacelift_stack" "dev_stack" {
@@ -43,7 +43,7 @@ resource "spacelift_policy" "instance_size_policy" {
 
 resource "spacelift_policy_attachment" "illegal_ports_attachment" {
   policy_id = spacelift_policy.illegal_ports.id
-  stack_id  = spacelift_stack.main_stack.id
+  stack_id  = spacelift_stack.prod_stack.id
 }
 resource "spacelift_policy_attachment" "illegal_ports_attachment_dev" {
   policy_id = spacelift_policy.illegal_ports.id
@@ -52,7 +52,7 @@ resource "spacelift_policy_attachment" "illegal_ports_attachment_dev" {
 
 resource "spacelift_policy_attachment" "enforce_cloud_provider_attachment" {
   policy_id = spacelift_policy.enforce_cloud_provider.id
-  stack_id  = spacelift_stack.main_stack.id
+  stack_id  = spacelift_stack.prod_stack.id
 }
 
 resource "spacelift_policy_attachment" "enforce_cloud_provider_attachment_dev" {
@@ -63,7 +63,7 @@ resource "spacelift_policy_attachment" "enforce_cloud_provider_attachment_dev" {
 
 resource "spacelift_policy_attachment" "instance_size_policy_attachment" {
   policy_id = spacelift_policy.instance_size_policy.id
-  stack_id  = spacelift_stack.main_stack.id
+  stack_id  = spacelift_stack.prod_stack.id
 }
 
 resource "spacelift_policy_attachment" "instance_size_policy_attachment_dev" {
