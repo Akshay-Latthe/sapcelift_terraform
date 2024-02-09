@@ -34,6 +34,8 @@ resource "spacelift_policy" "enforce_cloud_provider" {
 }
 
 
+
+
 resource "spacelift_policy" "instance_size_policy" {
   name = "Policy-03"
   body = file("${path.module}/policy/instance-size-policy.rego")
