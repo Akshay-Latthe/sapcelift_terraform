@@ -8,7 +8,7 @@ resource "spacelift_stack" "admin_stack" {
   terraform_version = "0.12.27"
 }
 
-resource "spacelift_stack" "main_stack" {
+resource "spacelift_stack" "prod_stack" {
   name       = var.prod_stack
   branch     = "prod"
   repository = "sapcelift_with_terraform"
