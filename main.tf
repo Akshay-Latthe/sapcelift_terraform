@@ -30,6 +30,8 @@ resource "spacelift_policy_attachment" "enforce_cloud_provider_attachment" {
 }
 
 
+
+
 resource "spacelift_policy" "instance_size_policy" {
   name = "Policy-03"
   body = file("${path.module}/policy/instance-size-policy.rego")
